@@ -124,11 +124,11 @@ namespace Keyman
         {
             try
             {
-                if (nCode >= 0)//&& wParam == (IntPtr)WM_LBUTTONDOWN //this condition is only for left mouse click
+                if (nCode >= 0 && wParam == (IntPtr)WM_LBUTTONDOWN)// //this condition is only for left mouse click
                 {
                     if (_timer != null && _timer.Enabled)
                     {
-                        LockWorkStation();                        
+                        LockWorkStation();
                     }
                 }
                 return CallNextHookEx(_mouseHookID, nCode, wParam, lParam);
@@ -195,6 +195,10 @@ namespace Keyman
         {
             if (_timer != null && _timer.Enabled)
             {
+                //prevent the lighthouse function to lock windows
+                if (_keys.Count > 0 && _keys[0] == CAPS)
+                    return true;
+
                 if (_keys.Count > 0 && _keys[0] == 'Q')
                     ClearTimer();
                 else
@@ -220,6 +224,7 @@ namespace Keyman
                     if (result == DialogResult.OK)
                     {
                         string input = form2.InputValue.Trim();
+                        input = string.IsNullOrEmpty(input) ? "30" : input; 
                         minutes = int.Parse(input);
                     }
                     else
@@ -228,8 +233,9 @@ namespace Keyman
                 //keep active
                 //minute counter
                 int minCounter = 0;
-                //move mouse every 60 seconds
-                _timer = new System.Timers.Timer(60 * 1000);
+                int triggerSecond = 5;
+                //move mouse every 5 seconds
+                _timer = new System.Timers.Timer(triggerSecond * 1000);
                 _timer.Elapsed += OnTimedEvent;
                 _timer.AutoReset = true;
                 _timer.Start();
@@ -239,9 +245,10 @@ namespace Keyman
                 void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
                 {
                     //minus 1, because the first OnTimedEvent will be invoked after 60 seconds
-                    if (minCounter < minutes - 1)
+                    if (minCounter < (minutes - 1) * (60 / triggerSecond))
                     {
-                        SetCursorPos(minCounter * 10, minCounter * 10);
+                        //SetCursorPos(minCounter * 10, minCounter * 10);
+                        SendKeys.SendWait("{CAPSLOCK}");
                         minCounter++;
                     }
                     else
