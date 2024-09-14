@@ -1,0 +1,9 @@
+C:\Users\hp\source\repos\Keyman\Keyman\bin\Debug\Keyman.exe.config
+C:\Users\hp\source\repos\Keyman\Keyman\bin\Debug\Keyman.exe
+C:\Users\hp\source\repos\Keyman\Keyman\bin\Debug\Keyman.pdb
+C:\Users\hp\source\repos\Keyman\Keyman\obj\Debug\Keyman.csproj.AssemblyReference.cache
+C:\Users\hp\source\repos\Keyman\Keyman\obj\Debug\Keyman.Properties.Resources.resources
+C:\Users\hp\source\repos\Keyman\Keyman\obj\Debug\Keyman.csproj.GenerateResource.cache
+C:\Users\hp\source\repos\Keyman\Keyman\obj\Debug\Keyman.csproj.CoreCompileInputs.cache
+C:\Users\hp\source\repos\Keyman\Keyman\obj\Debug\Keyman.exe
+C:\Users\hp\source\repos\Keyman\Keyman\obj\Debug\Keyman.pdb
